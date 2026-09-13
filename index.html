@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#173f35" />
+    <meta name="description" content="从五门医学口诀中随机抽题，先作答，再逐层查看口诀、知识点和解析。" />
+    <meta property="og:title" content="医诀 · 每日一练" />
+    <meta property="og:description" content="把口诀真正变成会用的知识" />
+    <meta property="og:image" content="./og.png" />
+    <title>医诀 · 每日一练</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="gate" class="gate-shell">
+      <section class="gate-card">
+        <div class="brand-row">
+          <span class="brand-icon" aria-hidden="true">医</span>
+          <div><h1>医诀 · 每日一练</h1><p>私人学习资料库</p></div>
+        </div>
+        <div class="privacy-note"><strong>仅限受邀同学使用</strong><span>题库经过加密，请输入共享密码后在本设备解锁。</span></div>
+        <form id="unlock-form">
+          <label for="password">共享密码</label>
+          <input id="password" type="password" inputmode="numeric" autocomplete="current-password" placeholder="请输入共享密码" required />
+          <p id="unlock-error" class="error" role="alert"></p>
+          <button id="unlock-button" class="primary wide" type="submit">进入题库</button>
+        </form>
+        <p class="fine-print">密码仅用于本地解密，不会发送到服务器。请勿转发密码或课程资料。</p>
+      </section>
+    </main>
+
+    <main id="study-app" class="app hidden">
+      <header>
+        <div class="header-inner">
+          <div class="brand-row compact"><span class="brand-icon">医</span><div><strong>医诀 · 每日一练</strong><small>把口诀真正变成会用的知识</small></div></div>
+          <button id="settings-toggle" class="icon-button" aria-label="打开设置">⚙</button>
+        </div>
+      </header>
+
+      <section id="settings" class="settings hidden">
+        <div class="settings-inner">
+          <div><h2>每日复习设置</h2><p>数量可随时调整，学习记录不会丢失。</p></div>
+          <label>每天抽取几道<input id="count-input" type="number" min="1" max="20" value="5" /></label>
+          <fieldset><legend>抽题方式</legend><label><input type="radio" name="mode" value="mixed" checked />智能混合</label><label><input type="radio" name="mode" value="balanced" />科目均衡</label></fieldset>
+          <fieldset><legend>练习科目</legend><div id="subject-options" class="subject-options"></div></fieldset>
+          <button id="save-settings" class="primary">保存设置</button>
+        </div>
+      </section>
+
+      <div class="layout">
+        <section class="main-column">
+          <div class="intro-row">
+            <div><p id="question-position" class="eyebrow"></p><h1>先想一想，再揭晓答案</h1></div>
+            <div class="progress-wrap"><span id="progress-text"></span><div class="progress"><i id="progress-bar"></i></div></div>
+          </div>
+
+          <article class="question-card">
+            <div class="question-meta"><span id="subject-badge" class="badge"></span><span id="question-kind"></span></div>
+            <p class="overline">提纲问题</p>
+            <h2 id="question"></h2>
+            <label for="answer">写下你的答案</label>
+            <textarea id="answer" placeholder="不用追求完整，先写下能想到的关键词……"></textarea>
+            <div id="reveals"></div>
+            <div class="card-actions">
+              <button id="reset-answer" class="ghost">↻ 重新作答</button>
+              <div id="reveal-actions"><button id="reveal-next" class="primary">看口诀</button></div>
+            </div>
+          </article>
+
+          <nav class="question-nav" aria-label="今日题目导航">
+            <button id="previous" class="ghost">‹ 上一题</button>
+            <div id="dots" class="dots"></div>
+            <button id="next" class="ghost">下一题 ›</button>
+          </nav>
+
+          <section id="group-complete" class="complete hidden">
+            <div><strong>这一组完成啦</strong><p id="complete-copy"></p></div>
+            <button id="draw-again" class="primary">↝ 再抽一组</button>
+          </section>
+        </section>
+
+        <aside>
+          <section class="side-card"><strong>🔥 今日节奏</strong><b id="daily-count"></b><p id="mode-copy"></p><div id="selected-subjects"></div></section>
+          <section class="side-card dark"><small>题库已收录</small><b id="library-count"></b><p>生理 · 病理 · 内科 · 外科 · 生化</p></section>
+          <section class="side-card"><small>学习概览</small><dl><div><dt>待复习</dt><dd id="review-count"></dd></div><div><dt>今日累计</dt><dd id="today-count"></dd></div></dl><p id="coverage"></p></section>
+        </aside>
+      </div>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
